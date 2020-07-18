@@ -26,6 +26,7 @@ namespace inConcert.iMS.Api.Controllers
         private readonly IConfiguration _config;
         private readonly IBOCallsService _boCallsService;
         private readonly ISecurityService _securityService;
+
         public BOCallsController(IMapper mapper, IConfiguration config, IBOCallsService boCallsService, ISecurityService securityService)
         {
             _mapper = mapper;
