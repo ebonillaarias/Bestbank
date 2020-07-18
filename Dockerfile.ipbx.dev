@@ -1,0 +1,30 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+WORKDIR /app
+
+COPY src/inConcert.iMS.iPBX.Api/*.csproj  ./inConcert.iMS.iPBX.Api/
+COPY src/inConcert.iMS.iPBX.Api/Directory.Build.props  ./inConcert.iMS.iPBX.Api/
+
+COPY src/inConcert.iMS.BusinessLogic/*.csproj  ./inConcert.iMS.BusinessLogic/
+COPY src/inConcert.iMS.BusinessLogic/Directory.Build.props  ./inConcert.iMS.BusinessLogic/
+
+COPY src/inConcert.iMS.DataAccess/*.csproj  ./inConcert.iMS.DataAccess/
+# COPY src/inConcert.iMS.DataAccess/Directory.Build.props  ./inConcert.iMS.DataAccess/
+
+COPY src/inConcert.iMS.ServiceAgent/*.csproj  ./inConcert.iMS.ServiceAgent/
+COPY src/inConcert.iMS.ServiceAgent/Directory.Build.props  ./inConcert.iMS.ServiceAgent/
+
+COPY src/inConcert.iMS.Domain/*.csproj  ./inConcert.iMS.Domain/
+COPY src/inConcert.iMS.Domain/Directory.Build.props  ./inConcert.iMS.Domain/
+
+COPY src/inConcert.iMS.Enums/*.csproj  ./inConcert.iMS.Enums/
+COPY src/inConcert.iMS.Enums/Directory.Build.props  ./inConcert.iMS.Enums/
+
+COPY src/inConcert.iMS.Ami/*.csproj  ./inConcert.iMS.Ami/
+COPY src/inConcert.iMS.Ami/Directory.Build.props  ./inConcert.iMS.Ami/
+
+RUN dotnet restore inConcert.iMS.iPBX.Api/inConcert.iMS.iPBX.Api.csproj
+
+EXPOSE 5005
+
+WORKDIR /app/inConcert.iMS.iPBX.Api
+ENTRYPOINT ["dotnet", "watch", "run", "--no-launch-profile"]

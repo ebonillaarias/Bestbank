@@ -1,0 +1,34 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+WORKDIR /app
+
+RUN dotnet tool install --global dotnet-ef --version 3.0.0
+ENV PATH $PATH:/root/.dotnet/tools
+
+
+COPY src/inConcert.iMS.Api/*.csproj  ./inConcert.iMS.Api/
+COPY src/inConcert.iMS.Api/Directory.Build.props  ./inConcert.iMS.Api/
+
+COPY src/inConcert.iMS.BusinessLogic/*.csproj  ./inConcert.iMS.BusinessLogic/
+COPY src/inConcert.iMS.BusinessLogic/Directory.Build.props  ./inConcert.iMS.BusinessLogic/
+
+COPY src/inConcert.iMS.DataAccess/*.csproj  ./inConcert.iMS.DataAccess/
+# COPY src/inConcert.iMS.DataAccess/Directory.Build.props  ./inConcert.iMS.DataAccess/
+
+COPY src/inConcert.iMS.ServiceAgent/*.csproj  ./inConcert.iMS.ServiceAgent/
+COPY src/inConcert.iMS.ServiceAgent/Directory.Build.props  ./inConcert.iMS.ServiceAgent/
+
+COPY src/inConcert.iMS.Domain/*.csproj  ./inConcert.iMS.Domain/
+COPY src/inConcert.iMS.Domain/Directory.Build.props  ./inConcert.iMS.Domain/
+
+COPY src/inConcert.iMS.Enums/*.csproj  ./inConcert.iMS.Enums/
+COPY src/inConcert.iMS.Enums/Directory.Build.props  ./inConcert.iMS.Enums/
+
+COPY src/inConcert.iMS.Ami/*.csproj  ./inConcert.iMS.Ami/
+COPY src/inConcert.iMS.Ami/Directory.Build.props  ./inConcert.iMS.Ami/
+
+RUN dotnet restore inConcert.iMS.Api/inConcert.iMS.Api.csproj
+
+EXPOSE 5000
+
+WORKDIR /app/inConcert.iMS.Api
+ENTRYPOINT ["dotnet", "watch", "run", "--no-launch-profile"]

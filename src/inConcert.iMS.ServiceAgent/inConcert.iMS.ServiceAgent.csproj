@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.6.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.6.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.6.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\inConcert.iMS.Ami\inConcert.iMS.Ami.csproj" />
+    <ProjectReference Include="..\inConcert.iMS.Domain\inConcert.iMS.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,9 @@
+2020-07-05 00:15:27  GenerateHash: {"Data":"string"}
+2020-07-05 00:16:18  GenerateHash: {"Data":"match por telefono: si hay más de uno no lo muestra... muestra informacion en formulario"}
+2020-07-05 00:51:20  api/bo/auth/Signin: {"user":"jcubota@inconcert.es","password":"81287023"}
+2020-07-05 00:52:05  api/bo/auth/Signin: {"user":"jcubota@inconcert.es","password":"81287023"}
+2020-07-05 00:53:19  api/auth/SignIn: {"host":"string","user":"jcubota@inconcert.es","password":"81287023","firebase_token":"string"}
+2020-07-05 00:53:57  api/auth/GenerateHash: {"Data":"test hash"}
+2020-07-07 00:30:08  api/bo/calls/PostCallSetCustomer: {"SessionId":"qu6148DA","CustomerId":"10410290","CustomerName":"TESTES TESTES"}
+2020-07-07 00:51:31  api/bo/calls/PostCallSetCustomer: {"SessionId":"qu6148DA","CustomerId":"10410290","CustomerName":"TESTES TESTES"}
+2020-07-07 10:11:21  api/bo/calls/PostCallSetCustomer: {"SessionId":"qu6148DA","CustomerId":"10410290","CustomerName":"TESTES TESTES"}

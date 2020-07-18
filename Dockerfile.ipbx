@@ -1,0 +1,42 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS base
+WORKDIR /app
+EXPOSE 5005
+
+# ####################
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+WORKDIR /app
+
+COPY src/inConcert.iMS.iPBX.Api/  ./inConcert.iMS.iPBX.Api/
+
+COPY src/inConcert.iMS.BusinessLogic/  ./inConcert.iMS.BusinessLogic/
+
+COPY src/inConcert.iMS.DataAccess/  ./inConcert.iMS.DataAccess/
+
+COPY src/inConcert.iMS.ServiceAgent/  ./inConcert.iMS.ServiceAgent/
+
+COPY src/inConcert.iMS.Domain/  ./inConcert.iMS.Domain/
+
+COPY src/inConcert.iMS.Enums/  ./inConcert.iMS.Enums/
+
+COPY src/inConcert.iMS.Ami/  ./inConcert.iMS.Ami/
+
+RUN dotnet restore inConcert.iMS.iPBX.Api/inConcert.iMS.iPBX.Api.csproj
+
+RUN dotnet build inConcert.iMS.iPBX.Api/inConcert.iMS.iPBX.Api.csproj -c Release --no-restore
+
+# ####################
+
+FROM build AS publish
+
+RUN dotnet publish inConcert.iMS.iPBX.Api/inConcert.iMS.iPBX.Api.csproj -c Release -o /out
+
+# ####################
+
+FROM base AS final
+WORKDIR /app
+
+COPY --from=publish /out .
+ENTRYPOINT ["dotnet", "inConcert.iMS.iPBX.Api.dll"]
+
+##################

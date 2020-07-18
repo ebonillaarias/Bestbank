@@ -1,0 +1,16 @@
+15/1/2020 17:00:36 
+ Status: EXTERNAL_SERVICE_ERROR 
+ Error: ECTI002: User não encontrado
+ Request: {"InteractionId":"64","Direction":0,"CallerId":"1502444999","CalledId":"12222222254545412222","UserId":"122222222545454","CustomerId":null}
+15/1/2020 17:03:18 
+ Status: EXTERNAL_SERVICE_ERROR 
+ Error: ECTI002: User não encontrado
+ Request: {"InteractionId":"65","Direction":0,"CallerId":"1502444999","CalledId":"12222222254545412222","UserId":"122222222545454","CustomerId":null}
+15/1/2020 17:05:44 
+ Status: EXTERNAL_SERVICE_ERROR 
+ Error: ECTI002: User não encontrado
+ Request: {"InteractionId":"66","Direction":0,"CallerId":"1502444999","CalledId":"12222222254545412222","UserId":"122222222545454","CustomerId":null}
+15/1/2020 17:06:58 
+ Status: EXTERNAL_SERVICE_ERROR 
+ Error: OK: Sucesso
+ Request: {"InteractionId":"67","Direction":0,"CallerId":"1502444999","CalledId":"00351967212359","UserId":"BEST8CI","CustomerId":null}
