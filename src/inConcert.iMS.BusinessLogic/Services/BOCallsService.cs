@@ -201,6 +201,7 @@ namespace inConcert.iMS.BusinessLogic.Services
 
             try
             {
+                var context = _callsRepository.GetContext();
                 // De la tabla CallParts obtengo los ID de las llamadas en las que la ultima parte de la llamada
                 // cumplen con los filtros: CommercialId y Result
                 List<int> listCallId = _callPartsRepository
@@ -234,11 +235,28 @@ namespace inConcert.iMS.BusinessLogic.Services
                 returnModel.Calls = new List<BOCallModel>();
                 returnModel.Status = ResultStatus.SUCCESS;
 
+                //Obtengo todos lo callsrecords
+                List<CallsRecords> listrecords = new List<CallsRecords>();
+                listrecords = _storeProcedureRepository.spGetListCallsRecords("", context.Database.GetDbConnection().ConnectionString);
+
                 foreach (Calls c in callDB)
                 {
                     // obtengo la primera parte de la llamada (para poder completar  los campos 'Result' y 'Transferred' si aplica)
                     string maximum = c.CallParts.Max(cp => cp.CallPartNumber);
                     CallParts auxCallPart = c.CallParts.FirstOrDefault(cp => cp.CallPartNumber.Equals(maximum));
+
+                    bool ispaused = false;
+                    int nropaused = 0;
+
+                    if (listrecords.Count() > 0) 
+                    {
+                        List<CallsRecords> callrecords = listrecords.Where(x => x.CallId == c.Id).ToList();
+                        if (callrecords.Count() > 0)
+                        {
+                            ispaused = true;
+                            nropaused = callrecords.Count();
+                        }
+                    }                      
 
                     string callDuration = "";
                     if (c.EndDate.HasValue)
@@ -262,7 +280,9 @@ namespace inConcert.iMS.BusinessLogic.Services
                         CallParts = c.CallParts,
                         CustomerId = c.CustomerId,
                         Result = auxCallPart.CallResult,
-                        Transferred = auxCallPart.CommercialName
+                        Transferred = auxCallPart.CommercialName,
+                        IsPaused = ispaused,
+                        NroPaused = nropaused
                     });
                 }
 
@@ -294,6 +314,7 @@ namespace inConcert.iMS.BusinessLogic.Services
 
             try
             {
+                var context = _callsRepository.GetContext();
                 // Recupero informacion de la llamada
                 Calls callDB = _callsRepository.GetById(id);
                 if (callDB == null)
@@ -337,6 +358,8 @@ namespace inConcert.iMS.BusinessLogic.Services
                            EndDate = cp.EndDate,
                            Path = !string.IsNullOrWhiteSpace(cp.FilePath) ? Path.Combine(url, cp.FilePath) : ""
                        });
+                    responseModel.Records = _storeProcedureRepository.spGetListCallsRecords(id.ToString(), context.Database.GetDbConnection().ConnectionString);
+
                     responseModel.Status = ResultStatus.SUCCESS;
                 }
                 return responseModel;

@@ -8,5 +8,7 @@ namespace inConcert.iMS.DataAccess.Repositories.Interfaces
     public interface IStoreProcedureRepository
     {
         int SaveCallRecord(CallsRecords callsrecords, string ConnString);
+
+        List<CallsRecords> spGetListCallsRecords(string CallId, string ConnString);
     }
 }

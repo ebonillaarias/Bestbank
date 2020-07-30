@@ -239,6 +239,7 @@ namespace inConcert.iMS.Api.Controllers
                         GetBOCallDetailsResponseDto response;
                         response = _mapper.Map<GetBOCallDetailsResponseDto>(businessResponse.Info);
                         response.Parts = _mapper.Map<List<BOCallPartsDto>>(businessResponse.Parts);
+                        response.Records = _mapper.Map<List<CallsRecodsResponseDto>>(businessResponse.Records);
                         return StatusCode(StatusCodes.Status200OK, response);
 
                     case ResultStatus.NOT_FOUND:
